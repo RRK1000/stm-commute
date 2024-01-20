@@ -1,26 +1,52 @@
+import React, { useEffect } from 'react';
+import { View, Text, NativeEventEmitter, NativeModules } from 'react-native';
+import NfcManager, { NfcTech } from 'react-native-nfc-manager';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import NfcManager, { NfcEvents } from 'react-native-nfc-manager';
 
 
 NfcManager.start();
 
 export default function App() {
-  async function scanTag() {
-      NfcManager.setEventListener(NfcEvents.DiscoverTag, (tag) => {
-        console.log("tag found", tag);
-      })
+  useEffect(() => {
+    initNfc();
 
-    await NfcManager.registerTagEvent();
-  }
+    return () => {
+      deinitNfc();
+    };
+  }, []);
+
+  const initNfc = async () => {
+    await NfcManager.start();
+    NfcManager.setEventListener(NfcTech.Ndef, handleNdef);
+  };
+
+  const deinitNfc = () => {
+    NfcManager.setEventListener(NfcTech.Ndef, null);
+    NfcManager.stop();
+  };
+
+  const handleNdef = async (tag) => {
+    // Handle NDEF data
+    console.log(tag);
+  };
 
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <TouchableOpacity onPress={scanTag}>
-        <Text>Scan a Tag</Text>
+    <View>
+      <Text>Your NFC-Enabled Component</Text>
+      <TouchableOpacity onPress={toggleNfcOperation}>
+        <View
+          style={{
+            backgroundColor: '#3498db',
+            padding: 10,
+            margin: 10,
+            borderRadius: 5,
+          }}
+        >
+          <Text style={{ color: '#fff' }}>
+            {isReading ? 'Stop Reading' : 'Start Reading'}
+          </Text>
+        </View>
       </TouchableOpacity>
-      <StatusBar style="auto" />
     </View>
   );
 }
