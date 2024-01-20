@@ -1,27 +1,43 @@
-import React from 'react';
-import { View, FlatList, Image, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Image, StyleSheet } from 'react-native';
+import PocketBase from 'pocketbase'
 
-const Cards = () => {
+const url = 'https://stm-commute.pockethost.io/'
+const pb = new PocketBase(url)
+
+
+const PocketBaseCardsList: React.FC = () => {
+    const [cardsData, setCardsData] = useState<any[]>([]); // Assuming any data structure
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                await pb.admins.authWithPassword('admin@admin.com', 'admin123123');
+
+                const user = await pb.collection('users').getFirstListItem('name="rrk"', {
+                    expand: 'cards',
+                });
+                const userJson = JSON.parse(JSON.stringify(user))
+                setCardsData(userJson["cards"]);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchData();
+    }, []); // Empty dependency array to fetch data only once on mount
+
     return (
         <View style={styles.container}>
-            <FlatList
-                data={[
-                    {
-                        id: 1,
-                        source: require('../../../../assets/opus.png'),
-                    },
-                    {
-                        id: 2,
-                        source: require('../../../../assets/opus.png'),
-                    },
-                    {
-                        id: 3,
-                        source: require('../../../../assets/opus.png'),
-                    },
-                ]}
-                renderItem={({ item }) => <Image source={item.source} style={styles.image} />}
-                keyExtractor={(item) => item.id.toString()}
-            />
+            <Text style={styles.heading}>PocketBase Cards List</Text>
+            <View style={styles.cardsContainer}>
+                {cardsData.map((card, index) => (
+                    <View key={index} style={styles.card}>
+                        {/* Display card content */}
+                        <Image source={require('../../../../assets/opus.png')} style={styles.image} />
+                    </View>
+                ))}
+            </View>
         </View>
     );
 };
@@ -30,12 +46,32 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 16,
+        backgroundColor: '#fff',
+    },
+    heading: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 16,
+    },
+    cardsContainer: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+    },
+    card: {
+        border: '1px solid #ccc',
+        margin: 10,
+        padding: 10,
+        width: 200,
     },
     image: {
         width: 200,
         height: 200,
         marginBottom: 16,
     },
+    cardTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
 });
 
-export default Cards;
+export default PocketBaseCardsList;
