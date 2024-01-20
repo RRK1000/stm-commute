@@ -29,6 +29,21 @@ export default function App() {
     console.log(tag);
   };
 
+  const toggleNfcOperation = () => {
+    if (isReading) {
+      // Stop reading
+      NfcManager.setEventListener(NfcTech.Ndef, null);
+      setIsReading(false);
+    } else {
+      // Start reading
+      NfcManager.setEventListener(NfcTech.Ndef, handleNdef);
+      setIsReading(true);
+
+      // You can also trigger NFC transmission logic here
+      // Example: NfcManager.setNdefPushMessage({ uri: 'https://example.com' });
+    }
+  };
+  
   return (
     <View>
       <Text>Your NFC-Enabled Component</Text>
