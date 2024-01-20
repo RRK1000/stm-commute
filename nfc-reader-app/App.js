@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
-import { View, Text, NativeEventEmitter, NativeModules } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
 import NfcManager, { NfcTech } from 'react-native-nfc-manager';
-import { StatusBar } from 'expo-status-bar';
 
 
 NfcManager.start();
