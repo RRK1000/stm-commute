@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import NfcManager, { NfcTech } from 'react-native-nfc-manager';
 
 
 NfcManager.start();
 
 export default function App() {
+  const [isReading, setIsReading] = useState(false); 
+
   useEffect(() => {
     initNfc();
 
