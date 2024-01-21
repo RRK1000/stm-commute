@@ -1,45 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView, View, Text, ScrollView, RefreshControl } from "react-native";
 import tailwind from "twrnc";
-import { Avatar } from 'react-native-elements';
-import PocketBase from 'pocketbase'
+import { Avatar, ListItem } from 'react-native-elements';
+import PocketBase from 'pocketbase';
 
-const url = 'https://stm-commute.pockethost.io/'
-const pb = new PocketBase(url)
+const url = 'https://stm-commute.pockethost.io/';
+const pb = new PocketBase(url);
 
 interface User {
     name: string;
     age: number;
     email: string;
+    pfp: string;
 }
 
 const UserProfile: React.FC = () => {
-
-    const [refreshing, setRefreshing] = React.useState(false);
-    const onRefresh = React.useCallback(() => {
-        setRefreshing(true);
-        fetchData();
-        setTimeout(() => {
-          setRefreshing(false);
-        }, 1000);
-      }, []);
-
-    const [userData, setUserData] = useState<any>(); // Assuming any data structure
+    const [userData, setUserData] = useState<User | null>(null);
 
     const fetchData = async () => {
         try {
             await pb.admins.authWithPassword('admin@admin.com', 'admin123123');
 
-            const pbuser = await pb.collection('users').getFirstListItem('name="rrk"', {
+            const pbuser = await pb.collection('users').getFirstListItem('name="Armando Christian Pérez"', {
                 expand: 'cards',
             });
 
-            const userJson = JSON.parse(JSON.stringify(pbuser))
+            const userJson = JSON.parse(JSON.stringify(pbuser));
 
             const user: User = {
                 name: userJson.name,
                 age: userJson.age,
                 email: userJson.email,
+                pfp: userJson.pfp,
             };
             setUserData(user);
         } catch (error) {
@@ -49,24 +41,35 @@ const UserProfile: React.FC = () => {
 
     useEffect(() => {
         fetchData();
-    }, []); // Empty dependency array to fetch data only once on mount
+    }, []);
+
     return (
-        <ScrollView 
-            showsVerticalScrollIndicator={false} 
-        refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-          }>
-            <SafeAreaView style={tailwind`w-full flex-1 bg-gray-50`}>
-                <View style={tailwind`flex-1 items-center justify-center gap-8`}>
-                    <View style={tailwind`gap-2 items-center`}>
-                        <Text style={tailwind`text-gray-950 text-3xl font-bold`}>
-                            {userData ? userData.name : ""}
-                        </Text>
-                        <Text style={tailwind`text-gray-950 text-lg`}>{userData ? userData.email : ""}</Text>
-                    </View>
+    
+            <SafeAreaView style={{ width: '100%', flex: 1, backgroundColor: 'white' }}>
+                <View style={{ paddingTop:90, alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+                    {userData && (
+                        <View style={{ gap: 2, alignItems: 'center' }}>
+                            <Avatar
+                                rounded
+                                source={{
+                                    uri: userData.pfp,
+                                }}
+                                size="xlarge"
+                            />
+                            <Text style={{ fontSize: 24, fontWeight: 'bold' }}>
+                                {userData.name}
+                            </Text>
+                            <Text style={{ fontSize: 16 }}>
+                                {userData.email}
+                            </Text>
+                            <Text style={{ fontSize: 16 }}>
+                                {userData.age}
+                            </Text>
+                        </View>
+                    )}
                 </View>
             </SafeAreaView>
-          </ScrollView>
     );
 };
+
 export default UserProfile;

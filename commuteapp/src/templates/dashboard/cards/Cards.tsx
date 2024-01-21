@@ -14,7 +14,7 @@ const PocketBaseCardsList: React.FC = () => {
         try {
             await pb.admins.authWithPassword('admin@admin.com', 'admin123123');
 
-            const user = await pb.collection('users').getFirstListItem('name="rrk"', {
+            const user = await pb.collection('users').getFirstListItem('name="Armando Christian Pérez"', {
                 expand: 'cards',
             });
             const userJson = JSON.parse(JSON.stringify(user))

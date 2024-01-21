@@ -7,6 +7,9 @@ import Dashboard from './dashboard/Dashboard';
 import UserProfile from './dashboard/profile/UserProfile';
 import { Button } from 'react-native-elements';
 import LoginButton from './login/Login';
+import { Ionicons } from '@expo/vector-icons';
+import { EvilIcons } from '@expo/vector-icons';
+
 
 function HomeScreen() {
   return (
@@ -50,8 +53,18 @@ export default function Home() {
         :
         <NavigationContainer independent={true}>
           <Tab.Navigator>
-            <Tab.Screen name="Home" component={HomeScreen} />
-            <Tab.Screen name="Profile" component={Profile} />
+            <Tab.Screen name="Home" component={HomeScreen} options={{
+      tabBarLabel: 'Home',
+      tabBarIcon: ({ color, size }) => (
+        <Ionicons name="home" color={color} size={size} />
+      ),
+    }} />
+            <Tab.Screen name="Profile" component={Profile} options={{
+      tabBarLabel: 'Profile',
+      tabBarIcon: ({ color, size }) => (
+        <EvilIcons name="user" color={color} size={size*1.5} />
+      ),
+    }}/>
           </Tab.Navigator>
         </NavigationContainer>
       }
