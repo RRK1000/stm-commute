@@ -12,7 +12,7 @@ const Dashboard: React.FC = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.heading}>Dashboard</Text>
+            {/* <Text style={styles.heading}>Dashboard</Text> */}
             <View style={styles.tabContainer}>
                 <TouchableOpacity
                     style={[styles.tab, activeTab === 'My Cards' && styles.activeTab]}
@@ -47,7 +47,7 @@ const Dashboard: React.FC = () => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        // flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#009EE0',
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     heading: {
         fontSize: 24,
         fontWeight: 'bold',
-        marginBottom: 20,
+        marginBottom: 10,
     },
     tabContainer: {
         flexDirection: 'row',

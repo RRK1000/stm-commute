@@ -1,10 +1,15 @@
-import { Stack } from 'expo-router';
-import { NativeWindStyleSheet } from 'nativewind';
+import { ThemeProvider, DarkTheme } from '@react-navigation/native';
+import { Slot } from 'expo-router';
+// import { NativeWindStyleSheet } from 'nativewind';
 
-NativeWindStyleSheet.setOutput({
-  default: 'native',
-});
+// NativeWindStyleSheet.setOutput({
+//   default: 'native',
+// });
 
 export default function Layout() {
-  return <Stack />;
+  return (
+    <ThemeProvider value={DarkTheme}>
+      <Slot />
+    </ThemeProvider>
+  );
 }
