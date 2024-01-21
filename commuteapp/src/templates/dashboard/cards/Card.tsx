@@ -12,7 +12,6 @@ const Card = ({ id, img, fares } : {id:any, img:any, fares:any}) => {
     function monthName(mon:any) {
         return ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][mon];
      }
-    
 
     const emulate = () => {
         // The start emulation function receives a content, which
@@ -27,10 +26,9 @@ const Card = ({ id, img, fares } : {id:any, img:any, fares:any}) => {
           () => {
             console.log("isTagRead")
             setIsTagRead(true);
-            isRead = true;
             Vibration.vibrate(100);
             console.log(isTagRead)
-            setTimeout(() => setIsTagRead(false), 5000);
+            setTimeout(() => setIsTagRead(false), 3000);
           }
         )
     }
@@ -52,7 +50,7 @@ const Card = ({ id, img, fares } : {id:any, img:any, fares:any}) => {
                             <View style={styles.cardInfo}>
                                 <Text style={styles.text}>#{id}</Text>
                                 <View style={styles.faresBox}>
-                                    <Text style={styles.fares}>Fares available</Text>
+                                    <Text style={styles.fares}>Fares available:</Text>
                                     <FlatList
                                         showsVerticalScrollIndicator={false}
                                         data={Object.keys(fares)}
@@ -61,9 +59,9 @@ const Card = ({ id, img, fares } : {id:any, img:any, fares:any}) => {
                                             }}
                                         renderItem={({ item }) => {
                                             if (item === "monthly") {
-                                                return <Text style={styles.fares}>Monthly Pass for {monthName((new Date()).getMonth())}</Text>;
+                                                return <Text style={styles.fares}>Monthly - {monthName((new Date()).getMonth())}</Text>;
                                             } else {
-                                                return <Text style={styles.fares}>{item}: {fares[item]}</Text>;
+                                                return <Text style={styles.fares}>{item} - {fares[item]}</Text>;
                                             }
                                         }}
                                     />
@@ -180,7 +178,7 @@ const styles = StyleSheet.create({
     faresBox: {
         backgroundColor: '#ED7F00',
         borderRadius: 15,
-        opacity: 0.8,
+        opacity: 0.6,
         height: 140,
         width: 200,
     },
