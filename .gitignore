@@ -103,6 +103,7 @@ buck-out
 .watchmanconfig
 
 # Android
+android/*.*
 .idea
 .gradle
 local.properties
