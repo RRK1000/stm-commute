@@ -30,7 +30,6 @@ const Dashboard: React.FC = () => {
             {activeTab === 'My Cards' && (
                 <View>
                     {/* Render My Cards components here */}
-                    <Text>My Cardz</Text>
                     <Cards/>
                 </View>
             )}
@@ -59,7 +58,7 @@ const styles = StyleSheet.create({
     },
     tabContainer: {
         flexDirection: 'row',
-        marginBottom: 20,
+        anchorContent: 'bottom',
     },
     tab: {
         paddingHorizontal: 10,

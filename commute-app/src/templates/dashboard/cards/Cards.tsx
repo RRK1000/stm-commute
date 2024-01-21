@@ -31,7 +31,7 @@ const PocketBaseCardsList: React.FC = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.heading}>PocketBase Cards List</Text>
+            <Text style={styles.heading}>My Cards</Text>
             <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.cardsContainer}>
                 {cardsData.map((card, index) => (
                     <View key={index} style={styles.card}>
@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     heading: {
+        alignContent: 'center',
         fontSize: 24,
         fontWeight: 'bold',
         marginBottom: 16,
@@ -64,12 +65,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center',
-        padding: 16,
+        padding: 8,
     },
     card: {
         border: '1px solid #ccc',
         margin: 10,
-        padding: 10,
+        padding: 4,
         width: 200,
     },
 });
