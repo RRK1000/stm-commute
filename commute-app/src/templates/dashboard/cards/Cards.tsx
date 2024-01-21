@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import PocketBase from 'pocketbase'
 import Card from './Card'
 
@@ -23,6 +23,7 @@ const PocketBaseCardsList: React.FC = () => {
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
+            
         };
 
         fetchData();
@@ -31,16 +32,17 @@ const PocketBaseCardsList: React.FC = () => {
     return (
         <View style={styles.container}>
             <Text style={styles.heading}>PocketBase Cards List</Text>
-            <View style={styles.cardsContainer}>
+            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.cardsContainer}>
                 {cardsData.map((card, index) => (
                     <View key={index} style={styles.card}>
                         <Card
                             id={card["id"]}
                             img={card["source"]}
+                            fares={card["fares"]}
                         />
                     </View>
                 ))}
-            </View>
+            </ScrollView>
         </View>
     );
 };
@@ -51,6 +53,7 @@ const styles = StyleSheet.create({
         padding: 16,
         backgroundColor: '#009EE0',
         alignContent: 'center',
+        justifyContent: 'center',
     },
     heading: {
         fontSize: 24,
@@ -61,21 +64,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center',
+        padding: 16,
     },
     card: {
         border: '1px solid #ccc',
         margin: 10,
         padding: 10,
         width: 200,
-    },
-    image: {
-        width: 316,
-        height: 200,
-        marginBottom: 100,
-    },
-    cardTitle: {
-        fontSize: 18,
-        fontWeight: 'bold',
     },
 });
 
