@@ -13,20 +13,6 @@ const Dashboard: React.FC = () => {
     return (
         <View style={styles.container}>
             {/* <Text style={styles.heading}>Dashboard</Text> */}
-            <View style={styles.tabContainer}>
-                <TouchableOpacity
-                    style={[styles.tab, activeTab === 'My Cards' && styles.activeTab]}
-                    onPress={() => handleTabChange('My Cards')}
-                >
-                    <Text style={styles.tabText}>My Cards</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={[styles.tab, activeTab === 'My Profile' && styles.activeTab]}
-                    onPress={() => handleTabChange('My Profile')}
-                >
-                    <Text style={styles.tabText}>My Profile</Text>
-                </TouchableOpacity>
-            </View>
             {activeTab === 'My Cards' && (
                 <View>
                     {/* Render My Cards components here */}

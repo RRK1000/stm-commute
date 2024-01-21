@@ -49,7 +49,6 @@ const PocketBaseCardsList: React.FC = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 16,
         backgroundColor: '#fff',
         alignContent: 'center',
         justifyContent: 'center',
