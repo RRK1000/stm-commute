@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, FlatList, Image, StyleSheet, Modal, Pressable, Text, Vibration, Button } from 'react-native';
+import { View, FlatList, Image, StyleSheet, Modal, Pressable, Text, Vibration, ScrollView } from 'react-native';
 
-const Card = ({ id, img } : {id:any, img:any}) => {
+const Card = ({ id, img, fares } : {id:any, img:any, fares:any}) => {
     const [modalVisible, setModalVisible] = React.useState(false);
     return (
         <View style={styles.centered}>
@@ -16,14 +16,27 @@ const Card = ({ id, img } : {id:any, img:any}) => {
                         <View style={styles.modal}>
                             <Pressable 
                                 onPress={() => setModalVisible(!modalVisible)}>
-                                <Image source={require('../../../../assets/opus.png')} 
-                                style={styles.modalImage}/>
+                                <Image source={{uri:img}} style={styles.modalImage}/>
                             </Pressable>
                             <View style={styles.cardInfo}>
                                 <Text style={styles.text}>Opus ID number: #{id}</Text>
-                                <Text style={styles.text}>imgsrc: {img}</Text>
                                 <Text style={styles.text}>Available fares list</Text>
-
+                                <View style={styles.fares}>
+                                    <FlatList
+                                        showsVerticalScrollIndicator={false}
+                                        data={Object.keys(fares)}
+                                        contentContainerStyle={{
+                                            flexGrow: 1,
+                                            }}
+                                        renderItem={({ item }) => {
+                                            if (item === "monthly") {
+                                                return <Text style={styles.fares}>Monthly Pass for </Text>;
+                                            } else {
+                                                return <Text style={styles.fares}>{item}: {fares[item]}</Text>;
+                                            }
+                                        }}
+                                    />
+                                </View>
                                 <Pressable
                                     onPress={() => {
                                         Vibration.vibrate(100);
@@ -37,8 +50,7 @@ const Card = ({ id, img } : {id:any, img:any}) => {
                 <Pressable 
                     onPress={() => {
                         setModalVisible(true);
-                        Vibration.vibrate(80);
-                        console.warn("Tapped");}}>
+                        Vibration.vibrate(80);}}>
                     <Image source={require('../../../../assets/opus.png')} 
                     style={styles.image} />
                 </Pressable>
@@ -48,11 +60,11 @@ const Card = ({ id, img } : {id:any, img:any}) => {
 
 const styles = StyleSheet.create({
     centered: {
-        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
     },
     modal: {
+        marginTop: 160,
         backgroundColor: 'slategray',
         borderRadius: 20,
         width: 400,
@@ -101,6 +113,14 @@ const styles = StyleSheet.create({
     },
     cardInfo: {
         alignItems: 'center',
+    },
+    fares: {
+        backgroundColor: '#ED7F00',
+        opacity: 0.8,
+        color: 'white',
+        fontSize: 18,
+        fontWeight: 'bold',
+        height: 60,
     },
 });
 
