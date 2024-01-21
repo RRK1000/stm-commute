@@ -19,9 +19,9 @@ const Card = ({ id, img, fares } : {id:any, img:any, fares:any}) => {
                                 <Image source={{uri:img}} style={styles.modalImage}/>
                             </Pressable>
                             <View style={styles.cardInfo}>
-                                <Text style={styles.text}>Opus ID number: #{id}</Text>
-                                <Text style={styles.text}>Available fares list</Text>
-                                <View style={styles.fares}>
+                                <Text style={styles.text}>Opus #{id}</Text>
+                                <View style={styles.faresBox}>
+                                    <Text style={styles.fares}>Available fares list</Text>
                                     <FlatList
                                         showsVerticalScrollIndicator={false}
                                         data={Object.keys(fares)}
@@ -89,38 +89,45 @@ const styles = StyleSheet.create({
     },
     text: {
         color: 'white',
-        fontSize: 24,
+        fontSize: 32,
         fontWeight: 'bold',
-        marginTop: 16,
+        marginTop: 5,
+        marginBottom: 8,
     },
     faresButton: {
         borderRadius: 10,
         color: 'white',
         fontSize: 24,
         fontWeight: 'bold',
-        marginTop: 16,
+        marginTop: 18,
         textAlign: 'center',
         padding: 12,
         backgroundColor: '#ED7F00',
-        width: 180,
+        width: 200,
         height: 60,
         shadowColor: '#000',
         shadowOffset: {
             width: 3,
             height: 3,
         },
-        elevation: 5,
+        elevation: 10,
     },
     cardInfo: {
         alignItems: 'center',
     },
-    fares: {
+    faresBox: {
         backgroundColor: '#ED7F00',
+        borderRadius: 15,
         opacity: 0.8,
+        height: 140,
+        width: 200,
+    },
+    fares: {
+        marginLeft: 10,
         color: 'white',
         fontSize: 18,
         fontWeight: 'bold',
-        height: 60,
+        width: 200,
     },
 });
 
