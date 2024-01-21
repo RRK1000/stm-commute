@@ -2,4 +2,8 @@
   <string name="app_name">commuteapp</string>
   <string name="expo_splash_screen_resize_mode" translatable="false">contain</string>
   <string name="expo_splash_screen_status_bar_translucent" translatable="false">false</string>
+  <string name="com_auth0_client_id">xDBcV4UsghX8xbTbCguS7NQY8NNJpjhG</string>
+  <string name="com_auth0_domain">dev-00koxu7a0rd8crlg.us.auth0.com</string>
+  <string name="login">Log in</string>
+  <string name="logout">Log out</string>
 </resources>

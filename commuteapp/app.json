@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "dark",
     "scheme": "myapp",
     "splash": {
       "image": "./assets/splash.png",
@@ -37,7 +37,7 @@
       [
         "react-native-auth0",
         {
-          "domain": "dev-jmuj1s6u16g3iiug.us.auth0.com"
+          "domain": "dev-00koxu7a0rd8crlg.us.auth0.com"
         }
       ]
     ]
