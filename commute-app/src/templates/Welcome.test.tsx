@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react-native';
 
-import { Welcome } from './Welcome';
+import { Welcome } from './Home';
 
 describe('App component', () => {
   describe('Render method', () => {

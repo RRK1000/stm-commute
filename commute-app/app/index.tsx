@@ -1,18 +1,7 @@
-import { Stack } from 'expo-router';
+import Home from '@/templates/Home';
 
-/*import { Welcome } from '@/templates/Welcome';*/
-import Dashboard from '@/templates/dashboard/Dashboard';
-
-const Home = () => (
-  <>
-    <Stack.Screen
-      options={{
-        title: 'STM Commute App',
-      }}
-    />
-    {/* <Welcome /> */}
-    <Dashboard/>
-  </>
+const App = () => (
+    <Home />
 );
 
-export default Home;
+export default App;
