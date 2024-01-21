@@ -34,7 +34,10 @@ const PocketBaseCardsList: React.FC = () => {
             <View style={styles.cardsContainer}>
                 {cardsData.map((card, index) => (
                     <View key={index} style={styles.card}>
-                        <Card/>
+                        <Card
+                            id={card["id"]}
+                            img={card["source"]}
+                        />
                     </View>
                 ))}
             </View>
@@ -68,7 +71,7 @@ const styles = StyleSheet.create({
     image: {
         width: 316,
         height: 200,
-        marginBottom: 16,
+        marginBottom: 100,
     },
     cardTitle: {
         fontSize: 18,

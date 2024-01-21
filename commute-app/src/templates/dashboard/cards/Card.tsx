@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, FlatList, Image, StyleSheet, Modal, Pressable, Text, Vibration, Button } from 'react-native';
 
-const Card = () => {
+const Card = ({ id, img } : {id:any, img:any}) => {
     const [modalVisible, setModalVisible] = React.useState(false);
     return (
         <View style={styles.centered}>
@@ -19,11 +19,15 @@ const Card = () => {
                                 <Image source={require('../../../../assets/opus.png')} 
                                 style={styles.modalImage}/>
                             </Pressable>
-                            <View>
-                                <Text style={styles.text}>Opus ID number</Text>
-                                <Text style={styles.text}>Available fares</Text>
-                                
-                                <Pressable>
+                            <View style={styles.cardInfo}>
+                                <Text style={styles.text}>Opus ID number: #{id}</Text>
+                                <Text style={styles.text}>imgsrc: {img}</Text>
+                                <Text style={styles.text}>Available fares list</Text>
+
+                                <Pressable
+                                    onPress={() => {
+                                        Vibration.vibrate(100);
+                                    }}>
                                     <Text style={styles.faresButton}>Recharge</Text>
                                 </Pressable>
                             </View>
@@ -94,7 +98,10 @@ const styles = StyleSheet.create({
             height: 3,
         },
         elevation: 5,
-    }
+    },
+    cardInfo: {
+        alignItems: 'center',
+    },
 });
 
 export default Card;
