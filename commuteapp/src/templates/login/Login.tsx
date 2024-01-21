@@ -2,25 +2,27 @@ import { useAuth0, Auth0Provider } from 'react-native-auth0';
 import { Text, View } from 'react-native';
 import { Button } from 'react-native-elements';
 
-const Login = () => {
-    return (
-      <Auth0Provider domain={"dev-00koxu7a0rd8crlg.us.auth0.com"} clientId={"xDBcV4UsghX8xbTbCguS7NQY8NNJpjhG"}>
-        {
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>STM - Commute</Text>
-            <LoginButton />
-        </View>
-        }
-      </Auth0Provider>
-    );
-  };
+// const Login = () => {
+//     return (
+//       <Auth0Provider domain={"dev-00koxu7a0rd8crlg.us.auth0.com"} clientId={"xDBcV4UsghX8xbTbCguS7NQY8NNJpjhG"}>
+//         {
+//         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+//             <Text>STM - Commute</Text>
+//             <LoginButton />
+//         </View>
+//         }
+//       </Auth0Provider>
+//     );
+//   };
 
-  const LoginButton = () => {
+  const LoginButton = ({fn} : any) => {
     const {authorize} = useAuth0();
 
     const onPress = async () => {
         try {
             await authorize();
+            fn(true);
+            console.log("Authenticated!")
         } catch (e) {
             console.log(e);
         }
@@ -30,4 +32,4 @@ const Login = () => {
     );
 }
 
-export default Login;
+export default LoginButton;
