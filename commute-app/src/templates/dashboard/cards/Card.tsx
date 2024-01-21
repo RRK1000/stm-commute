@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, FlatList, Image, StyleSheet, Modal, Pressable, Text, Vibration, ScrollView } from 'react-native';
+import { View, FlatList, Image, StyleSheet, Modal, Pressable, Text, Vibration } from 'react-native';
 
 const Card = ({ id, img, fares } : {id:any, img:any, fares:any}) => {
     const [modalVisible, setModalVisible] = React.useState(false);
