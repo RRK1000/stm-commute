@@ -1,12 +1,13 @@
 
 import React from 'react';
-import { View, FlatList, Image, StyleSheet, Modal, Pressable, Text, Vibration, Button } from 'react-native';
+import { View, FlatList, Image, StyleSheet, Modal, Pressable, Text, Vibration } from 'react-native';
 import { HceTools } from 'react-native-nfc-sdk';
 
 const Card = ({ id, img, fares } : {id:any, img:any, fares:any}) => {
     const [modalVisible, setModalVisible] = React.useState(false);
     const hce = new HceTools();
-    const [isTagRead, setIsTagRead] = React.useState('No');
+
+    const [isTagRead, setIsTagRead] = React.useState(false);
 
     function monthName(mon:any) {
         return ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][mon];
@@ -25,9 +26,11 @@ const Card = ({ id, img, fares } : {id:any, img:any, fares:any}) => {
           {content: 'Hello World!', writable: false},
           () => {
             console.log("isTagRead")
-            setIsTagRead('Yes!');
+            setIsTagRead(true);
+            isRead = true;
+            Vibration.vibrate(100);
             console.log(isTagRead)
-            setTimeout(() => setIsTagRead('No'), 5000);
+            setTimeout(() => setIsTagRead(false), 5000);
           }
         )
     }
@@ -58,7 +61,6 @@ const Card = ({ id, img, fares } : {id:any, img:any, fares:any}) => {
                                             }}
                                         renderItem={({ item }) => {
                                             if (item === "monthly") {
-                                                console.log(monthName((new Date()).getMonth()))
                                                 return <Text style={styles.fares}>Monthly Pass for {monthName((new Date()).getMonth())}</Text>;
                                             } else {
                                                 return <Text style={styles.fares}>{item}: {fares[item]}</Text>;
@@ -66,17 +68,33 @@ const Card = ({ id, img, fares } : {id:any, img:any, fares:any}) => {
                                         }}
                                     />
                                 </View>
-                                <Pressable
-                                    onPress={() => {
-                                        Vibration.vibrate(100);
-                                    }}>
-                                    <Text style={styles.faresButton}>Recharge</Text>
-                                </Pressable>
-
-                                <View>
-                                    <Button onPress={emulate} title="Use Card" 
-                                    />
-                                    <Text>Was the tag read? {isTagRead}.</Text>
+                                <View style={styles.buttons}>
+                                    <Pressable
+                                        onPress={() => {
+                                            Vibration.vibrate(100);
+                                        }}>
+                                        <Text style={styles.faresButton}>Recharge</Text>
+                                    </Pressable>
+                                    <Pressable
+                                        onPress={() => {
+                                            emulate();
+                                            Vibration.vibrate(50);
+                                        }}
+                                        style={{
+                                        borderRadius: 10,
+                                        marginTop: 12,
+                                        padding: 12,
+                                        width: 180,
+                                        height: 60,
+                                        shadowColor: '#000',
+                                        shadowOffset: {
+                                            width: 3,
+                                            height: 3,
+                                        },
+                                        elevation: 10, 
+                                        backgroundColor: isTagRead ? '#1df569' : '#009EE0'}}>
+                                        <Text style={styles.useButton}>Use Card</Text>
+                                    </Pressable>
                                 </View>
                             </View>
                         </View>
@@ -133,11 +151,11 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 24,
         fontWeight: 'bold',
-        marginTop: 18,
+        marginTop: 12,
         textAlign: 'center',
         padding: 12,
         backgroundColor: '#ED7F00',
-        width: 200,
+        width: 180,
         height: 60,
         shadowColor: '#000',
         shadowOffset: {
@@ -145,6 +163,16 @@ const styles = StyleSheet.create({
             height: 3,
         },
         elevation: 10,
+    },
+    useButton: {
+        color: 'white',
+        fontSize: 24,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    buttons: {
+        flexDirection: 'row',
+        padding: 10,
     },
     cardInfo: {
         alignItems: 'center',
