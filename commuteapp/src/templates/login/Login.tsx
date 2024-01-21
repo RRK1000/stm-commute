@@ -1,12 +1,13 @@
 import { useAuth0, Auth0Provider } from 'react-native-auth0';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
+import { Button } from 'react-native-elements';
 
 const Login = () => {
     return (
-      <Auth0Provider domain={"dev-jmuj1s6u16g3iiug.us.auth0.com"} clientId={"lMHrQtiBomIGFCTFxaNOl43AuMD8389V"}>
+      <Auth0Provider domain={"dev-00koxu7a0rd8crlg.us.auth0.com"} clientId={"xDBcV4UsghX8xbTbCguS7NQY8NNJpjhG"}>
         {
-        <View>
-            <Text>mr worldwide mr 305</Text>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Text>STM - Commute</Text>
             <LoginButton />
         </View>
         }
@@ -24,8 +25,9 @@ const Login = () => {
             console.log(e);
         }
     };
-
-    return <Button onPress={onPress} title="Log in" />
+    return (
+        <Button onPress={onPress} title="Sign In" /> 
+    );
 }
 
 export default Login;

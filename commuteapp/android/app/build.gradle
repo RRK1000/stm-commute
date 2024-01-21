@@ -87,7 +87,7 @@ android {
         testBuildType System.getProperty('testBuildType', 'debug')
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
 // @generated begin react-native-auth0-manifest-placeholder - expo prebuild (DO NOT MODIFY) sync-a86b945124bca455ff4573bf5f88cb0e28c5b317
-manifestPlaceholders = [auth0Domain: "dev-jmuj1s6u16g3iiug.us.auth0.com", auth0Scheme: "com.anonymous.commuteapp.auth0"]
+        manifestPlaceholders = [auth0Domain: "dev-00koxu7a0rd8crlg.us.auth0.com", auth0Scheme: "com.anonymous.commuteapp.auth0"]
 // @generated end react-native-auth0-manifest-placeholder
         applicationId 'com.anonymous.commuteapp'
         minSdkVersion rootProject.ext.minSdkVersion

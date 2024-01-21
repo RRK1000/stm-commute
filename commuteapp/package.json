@@ -23,6 +23,7 @@
     "e2e:android": "run-s e2e:android:*"
   },
   "dependencies": {
+    "@react-navigation/native": "^6.1.9",
     "expo": "^49.0.5",
     "expo-constants": "~14.4.2",
     "expo-linking": "~5.0.2",
