@@ -7,6 +7,10 @@ const Card = ({ id, img, fares } : {id:any, img:any, fares:any}) => {
     const [modalVisible, setModalVisible] = React.useState(false);
     const hce = new HceTools();
     const [isTagRead, setIsTagRead] = React.useState('No');
+
+    function monthName(mon:any) {
+        return ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][mon];
+     }
     
 
     const emulate = () => {
@@ -43,9 +47,9 @@ const Card = ({ id, img, fares } : {id:any, img:any, fares:any}) => {
                                 <Image source={{uri:img}} style={styles.modalImage}/>
                             </Pressable>
                             <View style={styles.cardInfo}>
-                                <Text style={styles.text}>Opus #{id}</Text>
+                                <Text style={styles.text}>#{id}</Text>
                                 <View style={styles.faresBox}>
-                                    <Text style={styles.fares}>Available fares list</Text>
+                                    <Text style={styles.fares}>Fares available</Text>
                                     <FlatList
                                         showsVerticalScrollIndicator={false}
                                         data={Object.keys(fares)}
@@ -54,7 +58,8 @@ const Card = ({ id, img, fares } : {id:any, img:any, fares:any}) => {
                                             }}
                                         renderItem={({ item }) => {
                                             if (item === "monthly") {
-                                                return <Text style={styles.fares}>Monthly Pass for </Text>;
+                                                console.log(monthName((new Date()).getMonth()))
+                                                return <Text style={styles.fares}>Monthly Pass for {monthName((new Date()).getMonth())}</Text>;
                                             } else {
                                                 return <Text style={styles.fares}>{item}: {fares[item]}</Text>;
                                             }
@@ -69,8 +74,9 @@ const Card = ({ id, img, fares } : {id:any, img:any, fares:any}) => {
                                 </Pressable>
 
                                 <View>
-                                    <Button onPress={emulate} title="Use Card" />
-                                    <Text>Was the tag read? {isTagRead}</Text>
+                                    <Button onPress={emulate} title="Use Card" 
+                                    />
+                                    <Text>Was the tag read? {isTagRead}.</Text>
                                 </View>
                             </View>
                         </View>
@@ -80,8 +86,7 @@ const Card = ({ id, img, fares } : {id:any, img:any, fares:any}) => {
                     onPress={() => {
                         setModalVisible(true);
                         Vibration.vibrate(80);}}>
-                    <Image source={require('../../../../assets/opus.png')} 
-                    style={styles.image} />
+                    <Image source={{uri:img}} style={styles.image}/>
                 </Pressable>
         </View>
     );
