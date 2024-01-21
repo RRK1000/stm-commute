@@ -22,7 +22,11 @@ const UserProfile: React.FC = () => {
                 const pbuser = await pb.collection('users').getFirstListItem('name="rrk"', {
                     expand: 'cards',
                 });
+                console.log(pbuser);
+
                 const userJson = JSON.parse(JSON.stringify(pbuser))
+                console.log(userJson);
+
                 const user: User = {
                     name: userJson.name,
                     age: userJson.age,
@@ -43,9 +47,9 @@ const UserProfile: React.FC = () => {
     return (
         <View>
             <Text>User Details</Text>
-            <Text>Name: {userData.name} </Text>
-            <Text>Age: {userData.age}  </Text>
-            <Text>Email: {userData.email} </Text>
+            <Text>Name: {userData ? userData.name:""} </Text>
+            <Text>Age: {userData ? userData.age : ""}  </Text>
+            <Text>Email: {userData ? userData.email : ""} </Text>
         </View>
     );
 };
