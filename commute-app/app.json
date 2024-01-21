@@ -28,6 +28,15 @@
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
     },
-    "plugins": ["@config-plugins/detox", "expo-router"]
+    "plugins": [
+      "@config-plugins/detox", 
+      "expo-router",
+      [
+        "react-native-auth0",
+        {
+          "domain": "dev-jmuj1s6u16g3iiug.us.auth0.com"
+        }
+      ]
+    ]
   }
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import PocketBase from 'pocketbase'
+import Card from './Card'
 
 const url = 'https://stm-commute.pockethost.io/'
 const pb = new PocketBase(url)
@@ -33,8 +34,7 @@ const PocketBaseCardsList: React.FC = () => {
             <View style={styles.cardsContainer}>
                 {cardsData.map((card, index) => (
                     <View key={index} style={styles.card}>
-                        {/* Display card content */}
-                        <Image source={require('../../../../assets/opus.png')} style={styles.image} />
+                        <Card/>
                     </View>
                 ))}
             </View>
@@ -46,7 +46,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 16,
-        backgroundColor: '#fff',
+        backgroundColor: '#009EE0',
+        alignContent: 'center',
     },
     heading: {
         fontSize: 24,
@@ -56,6 +57,7 @@ const styles = StyleSheet.create({
     cardsContainer: {
         flexDirection: 'row',
         flexWrap: 'wrap',
+        justifyContent: 'center',
     },
     card: {
         border: '1px solid #ccc',
@@ -64,7 +66,7 @@ const styles = StyleSheet.create({
         width: 200,
     },
     image: {
-        width: 200,
+        width: 316,
         height: 200,
         marginBottom: 16,
     },
