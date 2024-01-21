@@ -1,21 +1,21 @@
 {
   "expo": {
-    "name": "nfc-reader-app",
-    "slug": "nfc-reader-app",
+    "name": "commuteapp",
+    "slug": "commuteapp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "scheme": "myapp",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.commuteapp"
     },
     "android": {
       "adaptiveIcon": {
@@ -25,13 +25,21 @@
       "permissions": [
         "android.permission.NFC"
       ],
-      "package": "com.anonymous.nfcreaderapp"
+      "package": "com.anonymous.commuteapp"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
     },
     "plugins": [
-      "react-native-nfc-manager"
+      "@config-plugins/detox", 
+      "expo-router",
+      [
+        "react-native-auth0",
+        {
+          "domain": "dev-jmuj1s6u16g3iiug.us.auth0.com"
+        }
+      ]
     ]
   }
 }
